@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     git \
     curl \
+    libsqlite3-dev \
     && docker-php-ext-install pdo pdo_mysql pdo_sqlite
 
 # Enable Apache mod_rewrite
@@ -29,6 +30,9 @@ RUN composer install --no-dev --optimize-autoloader
 
 # Cache Laravel config/routes/views
 RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
+
+# Run migrations and seed database
+RUN php artisan migrate:refresh --force && php artisan db:seed --force
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
