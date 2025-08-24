@@ -66,10 +66,7 @@
             "@php artisan config:clear --ansi",
             "@php artisan test"
         ],
-        "post-install-cmd": [
-            "npm install --prefix resources && npm run build --prefix resources",
-            "php artisan optimize"
-        ]
+        "post-install-cmd": []
     },
     "extra": {
         "laravel": {
