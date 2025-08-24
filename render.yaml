@@ -14,9 +14,9 @@ services:
           - key: APP_DEBUG
             value: false
           - key: APP_KEY
-            value: your-generated-key-here
+            value: base64:sUdjekfRpP1dWZ6TpX2pbX5mYVL2idYHpLTo0Gq+3vw=
           - key: APP_URL
-            value: https://your-app.onrender.com
+            value: https://laravel-time-tracker.onrender.com
           - key: DB_CONNECTION
             value: sqlite
           - key: DB_DATABASE
