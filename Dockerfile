@@ -8,24 +8,21 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Copy Laravel project
+# Set working directory
 WORKDIR /var/www/html
+
+# Copy project
 COPY . .
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN composer install --no-dev --optimize-autoloader
 
-# Prepare storage & sqlite
-RUN mkdir -p database \
-    && touch database/database.sqlite \
-    && chmod -R 775 database storage bootstrap/cache
+# Fix permissions
+RUN chmod -R 775 storage bootstrap/cache database || true
 
-# Expose port (must match Railway’s $PORT)
+# Expose Railway port
 EXPOSE 8080
 
-# Prepare SQLite database
-RUN mkdir -p database && touch database/database.sqlite
-
-# Run migrations on startup, then start Apache
+# Startup: run migrations then start Apache
 CMD php artisan migrate --force && apache2-foreground
