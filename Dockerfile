@@ -8,6 +8,9 @@ RUN apt-get update && apt-get install -y \
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
+# Make Apache listen on Railway's $PORT
+RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+
 # Set working directory
 WORKDIR /var/www/html
 
@@ -21,8 +24,12 @@ RUN composer install --no-dev --optimize-autoloader
 # Fix permissions
 RUN chmod -R 775 storage bootstrap/cache database || true
 
-# Expose Railway port
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Expose port (Railway will replace this with $PORT)
 EXPOSE 8080
 
-# Startup: run migrations then start Apache
-CMD php artisan migrate --force && apache2-foreground
+# Use entrypoint script
+CMD ["/entrypoint.sh"]
