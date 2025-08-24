@@ -60,6 +60,7 @@ const clockOut = async () => {
     isLoading.value = true;
 
     try {
+        // Get client information
         const userAgent = navigator.userAgent;
 
         // Get IP address from a public API

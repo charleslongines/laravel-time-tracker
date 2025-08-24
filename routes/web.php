@@ -34,7 +34,6 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
 
 // Time Tracker Routes
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/time-tracker', [TimeTrackerController::class, 'index'])->name('user.time-tracker.index');
     Route::post('/time-tracker/clock-in', [TimeTrackerController::class, 'clockIn'])->name('user.time-tracker.clock-in');
     Route::post('/time-tracker/clock-out', [TimeTrackerController::class, 'clockOut'])->name('user.time-tracker.clock-out');
     Route::resource('user/time-tracker', TimeTrackerController::class)->names('user.time-tracker');
