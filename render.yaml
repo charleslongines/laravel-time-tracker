@@ -1,7 +1,7 @@
 services:
     - type: web
       name: laravel-time-tracker
-      env: docker
+      env: php
       plan: free
       envVars:
           - key: APP_ENV
