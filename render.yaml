@@ -1,18 +1,33 @@
 services:
     - type: web
-      name: laravel-time-tracker
-      runtime: docker
+      name: laravel-app
+      env: php
       plan: free
+      buildCommand: |
+          composer install --optimize-autoloader --no-dev
+          php artisan config:clear
+          php artisan route:clear
+          php artisan view:clear
+
+          # ✅ Make sure SQLite file exists
+          mkdir -p database
+          touch database/database.sqlite
+
+          # ✅ Fix permissions
+          chmod -R 775 storage bootstrap/cache database
+
+      startCommand: |
+          php artisan migrate --force
+          php artisan db:seed --force
+          apache2-foreground
       envVars:
           - key: APP_ENV
             value: production
           - key: APP_DEBUG
             value: false
           - key: APP_KEY
-            value: base64:sUdjekfRpP1dWZ6TpX2pbX5mYVL2idYHpLTo0Gq+3vw=
-          - key: APP_URL
-            value: https://laravel-time-tracker.onrender.com
+            value: base64:your-app-key-here
           - key: DB_CONNECTION
             value: sqlite
           - key: DB_DATABASE
-            value: /var/www/html/database/database.sqlite
+            value: /opt/render/project/src/database/database.sqlite
