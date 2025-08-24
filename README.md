@@ -1,6 +1,6 @@
 # Laravel Time Tracker
 
-A modern time tracking application built with Laravel, Vue.js, and Inertia.js. This application allows users to clock in and out while tracking their IP addresses and user agents for security purposes.
+A modern time tracking application built with Laravel 12, Vue.js 3, TypeScript, and Inertia.js. This application allows users to clock in and out while tracking their IP addresses and user agents for security purposes.
 
 ## Features
 
@@ -10,13 +10,26 @@ A modern time tracking application built with Laravel, Vue.js, and Inertia.js. T
 - **User Agent Validation**: Tracks and validates browser user agents for security
 - **Admin Panel**: Administrative interface for user management and time tracking oversight
 - **Security**: IP address and user agent validation to prevent unauthorized access
-- **Modern UI**: Built with Vue.js, Tailwind CSS, and Inertia.js for a smooth user experience
+- **Modern UI**: Built with Vue.js 3, TypeScript, Tailwind CSS v4, and Inertia.js for a smooth user experience
+- **TypeScript Support**: Full TypeScript integration for better development experience
+- **Modern Development Tools**: ESLint, Prettier, and modern build tooling
+
+## Tech Stack
+
+- **Backend**: Laravel 12.x (PHP 8.2+)
+- **Frontend**: Vue.js 3 with TypeScript
+- **Styling**: Tailwind CSS v4 with CSS Variables
+- **Build Tool**: Vite 7.x
+- **Database**: SQLite (default) or MySQL/PostgreSQL
+- **UI Components**: Reka UI with shadcn-vue components
+- **Icons**: Lucide Vue Next
+- **Development**: ESLint, Prettier, TypeScript
 
 ## Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
 
-- **PHP** 8.2 or higher
+- **PHP** 8.2.12 or higher
 - **Composer** (PHP package manager)
 - **Node.js** 18 or higher
 - **npm** or **yarn** (Node.js package manager)
@@ -36,6 +49,7 @@ Make sure you have the following PHP extensions enabled:
 - OpenSSL PHP Extension
 - PCRE PHP Extension
 - PDO PHP Extension
+- PDO SQLite Extension
 - Tokenizer PHP Extension
 - XML PHP Extension
 
@@ -161,9 +175,24 @@ npm run build
 
 ### 10. Start the Development Server
 
+#### Option A: Using Laravel's Built-in Server
+
 ```bash
 php artisan serve
 ```
+
+#### Option B: Using the Development Script (Recommended)
+
+```bash
+composer run dev
+```
+
+This will start:
+
+- Laravel development server
+- Queue listener
+- Log watcher (Laravel Pail)
+- Vite development server
 
 The application will be available at `http://localhost:8000`
 
@@ -236,112 +265,18 @@ chown -R www-data:www-data storage bootstrap/cache
 
 Configure your web server (Apache/Nginx) to point to the `public` directory.
 
-#### Example Nginx Configuration
-
-```nginx
-server {
-    listen 80;
-    server_name your-domain.com;
-    root /path/to/laravel-time-tracker/public;
-
-    add_header X-Frame-Options "SAMEORIGIN";
-    add_header X-Content-Type-Options "nosniff";
-
-    index index.php;
-
-    charset utf-8;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
-
-    error_page 404 /index.php;
-
-    location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.2-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-
-    location ~ /\.(?!well-known).* {
-        deny all;
-    }
-}
-```
-
 ### Docker Deployment
 
-If you prefer using Docker, you can use Laravel Sail:
+The project includes Docker support with a `Dockerfile` and `docker-compose.yml`:
 
 ```bash
-# Install Laravel Sail
-composer require laravel/sail --dev
-
-# Publish Sail configuration
-php artisan sail:install
-
-# Start the application
-./vendor/bin/sail up -d
+# Build and run with Docker
+docker build -t laravel-time-tracker .
+docker run -p 8000:8000 laravel-time-tracker
 ```
 
-## Security Features
-
-- **IP Address Validation**: Users can only clock in from pre-approved IP addresses
-- **User Agent Validation**: Browser user agents are tracked and validated
-- **Role-Based Access**: Separate admin and user roles with appropriate permissions
-- **Secure Authentication**: Laravel's built-in authentication system
-- **CSRF Protection**: Cross-site request forgery protection enabled
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Permission Denied Errors**
-
-    ```bash
-    chmod -R 775 storage bootstrap/cache
-    ```
-
-2. **Database Connection Issues**
-    - Verify your `.env` file configuration
-    - Ensure the database server is running
-    - Check database credentials
-
-3. **Asset Loading Issues**
-
-    ```bash
-    npm run build
-    php artisan view:clear
-    ```
-
-4. **Migration Errors**
-    ```bash
-    php artisan migrate:fresh --seed
-    ```
-
-### Logs
-
-Check Laravel logs for detailed error information:
+Or use Docker Compose:
 
 ```bash
-tail -f storage/logs/laravel.log
+docker-compose up -d
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License.
-
-## Support
-
-For support and questions, please contact the development team or create an issue in the repository.
