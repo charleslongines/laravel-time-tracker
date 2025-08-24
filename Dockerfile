@@ -24,5 +24,8 @@ RUN mkdir -p database \
 # Expose port (must match Railway’s $PORT)
 EXPOSE 8080
 
+# Prepare SQLite database
+RUN mkdir -p database && touch database/database.sqlite
+
 # Run migrations on startup, then start Apache
 CMD php artisan migrate --force && apache2-foreground
