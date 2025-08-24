@@ -34,6 +34,10 @@ RUN php artisan config:cache && php artisan route:cache && php artisan view:cach
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
+# ⚡ Set Apache DocumentRoot to Laravel’s public folder
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
+    && sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/apache2.conf
+
 # Expose port
 EXPOSE 8080
 
