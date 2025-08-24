@@ -155,12 +155,6 @@ const deleteUser = (userId: number) => {
                                         >
                                             Edit
                                         </Link>
-                                        <button
-                                            class="text-red-600 hover:text-red-900 dark:text-red-400 dark:hover:text-red-300"
-                                            @click="deleteUser(user.id)"
-                                        >
-                                            Delete
-                                        </button>
                                     </div>
                                 </td>
                             </tr>
