@@ -17,6 +17,8 @@ RUN chmod -R 775 storage bootstrap/cache database || true
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-EXPOSE 8080   # For local testing; Railway uses $PORT
+# For local testing; Railway uses $PORT
+EXPOSE 8080
 
 CMD ["/entrypoint.sh"]
+
