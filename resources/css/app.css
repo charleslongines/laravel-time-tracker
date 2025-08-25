@@ -84,6 +84,24 @@
     }
 }
 
+/* Mobile debugging - remove this after fixing the issue */
+@media (max-width: 768px) {
+    /* Debug outline to see if elements are rendering */
+    * {
+        outline: 1px solid rgba(255, 0, 0, 0.1);
+    }
+
+    /* Ensure the main container is visible */
+    .flex.min-h-screen {
+        min-height: 100vh !important;
+        background-color: hsl(0 0% 100%) !important;
+    }
+
+    .dark .flex.min-h-screen {
+        background-color: hsl(0 0% 3.9%) !important;
+    }
+}
+
 :root {
     --background: hsl(0 0% 100%);
     --foreground: hsl(0 0% 3.9%);
@@ -163,5 +181,40 @@
     }
     body {
         @apply bg-background text-foreground;
+    }
+
+    /* Mobile-specific fixes */
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    /* Ensure proper viewport handling on mobile */
+    @media (max-width: 768px) {
+        body {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        /* Force background colors on mobile */
+        html {
+            background-color: hsl(0 0% 100%) !important;
+        }
+
+        html.dark {
+            background-color: hsl(0 0% 3.9%) !important;
+        }
+
+        body {
+            background-color: hsl(0 0% 100%) !important;
+        }
+
+        body.dark {
+            background-color: hsl(0 0% 3.9%) !important;
+        }
     }
 }
