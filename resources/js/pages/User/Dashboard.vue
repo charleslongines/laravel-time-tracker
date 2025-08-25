@@ -210,61 +210,59 @@ const formatDate = (dateString: string) => {
             <!-- Time Tracking Records Table -->
             <div class="mb-6">
                 <h2 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Time Tracking Records</h2>
-                <div class="w-full overflow-x-auto" style="max-width: 100%">
-                    <div class="inline-block min-w-full align-middle">
-                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                            <thead class="bg-gray-50 dark:bg-gray-800">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                        Date
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                        Start Time
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                        End Time
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                        Duration
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                                        Status
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-900">
-                                <tr v-if="timeTrackers.length === 0" class="text-center">
-                                    <td colspan="5" class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">No time tracking records found</td>
-                                </tr>
-                                <tr v-for="record in timeTrackers" :key="record.id" class="hover:bg-gray-50 dark:hover:bg-gray-800">
-                                    <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-white">
-                                        {{ formatDate(record.start_time) }}
-                                    </td>
-                                    <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-white">
-                                        {{ formatDate(record.start_time) }}
-                                    </td>
-                                    <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-white">
-                                        {{ record.end_time ? formatDate(record.end_time) : '-' }}
-                                    </td>
-                                    <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-white">
-                                        {{ formatDuration(record.duration) }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span
-                                            :class="[
-                                                'inline-flex rounded-full px-2 text-xs leading-5 font-semibold',
-                                                record.end_time
-                                                    ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                                                    : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-                                            ]"
-                                        >
-                                            {{ record.status.toUpperCase() }}
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full min-w-[800px] divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-800">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                                    Date
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                                    Start Time
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                                    End Time
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                                    Duration
+                                </th>
+                                <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                                    Status
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white dark:divide-gray-700 dark:bg-gray-900">
+                            <tr v-if="timeTrackers.length === 0" class="text-center">
+                                <td colspan="5" class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">No time tracking records found</td>
+                            </tr>
+                            <tr v-for="record in timeTrackers" :key="record.id" class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                                <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-white">
+                                    {{ formatDate(record.start_time) }}
+                                </td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-white">
+                                    {{ formatDate(record.start_time) }}
+                                </td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-white">
+                                    {{ record.end_time ? formatDate(record.end_time) : '-' }}
+                                </td>
+                                <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900 dark:text-white">
+                                    {{ formatDuration(record.duration) }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        :class="[
+                                            'inline-flex rounded-full px-2 text-xs leading-5 font-semibold',
+                                            record.end_time
+                                                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                                                : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+                                        ]"
+                                    >
+                                        {{ record.status.toUpperCase() }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
