@@ -148,7 +148,7 @@ const formatDate = (dateString: string) => {
     <Head title="Dashboard" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+        <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <!-- Clock In/Out Buttons -->
             <div class="mb-6 flex flex-col gap-4">
                 <!-- Success Message Display -->
@@ -210,8 +210,8 @@ const formatDate = (dateString: string) => {
             <!-- Time Tracking Records Table -->
             <div class="mb-6">
                 <h2 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Time Tracking Records</h2>
-                <div class="overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <div class="w-full overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+                    <table class="w-full min-w-[800px] divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-800">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
