@@ -210,7 +210,7 @@ const formatDate = (dateString: string) => {
             <!-- Time Tracking Records Table -->
             <div class="mb-6">
                 <h2 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Time Tracking Records</h2>
-                <div class="w-full overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+                <div class="w-full overflow-x-auto">
                     <table class="w-full min-w-[800px] divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-800">
                             <tr>
